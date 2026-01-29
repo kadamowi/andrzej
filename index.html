@@ -3,74 +3,614 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Strona dla Andrzeja</title>
+  <meta name="description" content="KOT_UTB — kompleksowa obsługa techniczna UTB. Przeglądy specjalne, ekspertyzy, resursy, badania złączy spawanych." />
+  <title>KOT_UTB — Wizytówka</title>
+
   <style>
-    :root {
-      --bg1: #0b1220;
-      --bg2: #0a0f1a;
-      --text: rgba(255,255,255,0.92);
-      --muted: rgba(255,255,255,0.72);
-      --card: rgba(255,255,255,0.06);
-      --border: rgba(255,255,255,0.12);
-      --shadow: 0 20px 60px rgba(0,0,0,0.45);
+    :root{
+      --bg: #0b1220;
+      --card: rgba(255,255,255,.06);
+      --card2: rgba(255,255,255,.10);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.72);
+      --border: rgba(255,255,255,.12);
+      --accent: #22c55e;        /* zielony */
+      --accent2:#16a34a;
+      --shadow: 0 20px 60px rgba(0,0,0,.35);
+      --radius: 18px;
+      --maxw: 1100px;
     }
 
-    * { box-sizing: border-box; }
-    html, body { height: 100%; margin: 0; }
-    body {
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    *{ box-sizing: border-box; }
+    html, body{ height: 100%; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
       color: var(--text);
       background:
-        radial-gradient(1200px 700px at 30% 20%, rgba(99,102,241,0.25), transparent 60%),
-        radial-gradient(900px 600px at 70% 80%, rgba(16,185,129,0.18), transparent 55%),
-        linear-gradient(180deg, var(--bg1), var(--bg2));
-      display: grid;
-      place-items: center;
-      padding: 24px;
+        radial-gradient(900px 500px at 10% 10%, rgba(34,197,94,.18), transparent 60%),
+        radial-gradient(800px 450px at 90% 20%, rgba(22,163,74,.15), transparent 55%),
+        linear-gradient(180deg, #070b14 0%, #0b1220 45%, #070b14 100%);
+      line-height: 1.55;
+      scroll-behavior: smooth;
     }
 
-    .card {
-      width: min(720px, 100%);
-      padding: 56px 28px;
-      text-align: center;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      box-shadow: var(--shadow);
+    a{ color: inherit; text-decoration: none; }
+    a:hover{ text-decoration: underline; }
+
+    .container{
+      width: min(var(--maxw), calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    header{
+      position: sticky;
+      top: 0;
+      z-index: 20;
       backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+      background: linear-gradient(180deg, rgba(11,18,32,.85), rgba(11,18,32,.55));
+      border-bottom: 1px solid var(--border);
     }
 
-    h1 {
-      margin: 0;
-      font-size: clamp(28px, 5vw, 52px);
-      letter-spacing: -0.02em;
-      line-height: 1.1;
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      padding: 14px 0;
+      gap: 14px;
     }
 
-    p {
-      margin: 14px 0 0;
-      font-size: clamp(18px, 2.4vw, 24px);
+    .brand{
+      display:flex;
+      align-items:center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .brand-badge{
+      width: 14px;
+      height: 14px;
+      border-radius: 4px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 10px 24px rgba(34,197,94,.25);
+      flex: 0 0 auto;
+    }
+
+    .brand-text{
+      display:flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+    }
+
+    .brand-text strong{
+      letter-spacing: .06em;
+      font-weight: 800;
+      font-size: 14px;
+      text-transform: uppercase;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .brand-text span{
+      font-size: 12px;
+      color: var(--muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    nav{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .navlink{
+      font-size: 13px;
+      color: var(--muted);
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      transition: .2s ease;
+    }
+    .navlink:hover{
+      color: var(--text);
+      border-color: var(--border);
+      background: rgba(255,255,255,.04);
+      text-decoration: none;
+    }
+
+    .logo{
+      position: fixed;
+      top: 12px;
+      right: 12px;
+      z-index: 30;
+      width: 160px;
+      max-width: 42vw;
+      height: auto;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: rgba(8, 13, 24, .55);
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow);
+    }
+
+    @media (min-width: 900px){
+      .logo{
+        top: 16px;
+        right: 18px;
+        width: 190px;
+      }
+    }
+
+    main{
+      padding: 34px 0 50px;
+    }
+
+    .hero{
+      margin-top: 14px;
+      display:grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap: 18px;
+      align-items: start;
+    }
+
+    @media (max-width: 860px){
+      .hero{
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .card{
+      background: linear-gradient(180deg, var(--card), rgba(255,255,255,.03));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .card-inner{
+      padding: 22px;
+    }
+
+    .kicker{
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      font-size: 12px;
+      letter-spacing: .10em;
+      text-transform: uppercase;
       color: var(--muted);
     }
 
-    .badge {
-      display: inline-block;
-      margin-top: 26px;
-      padding: 8px 14px;
+    .dot{
+      width: 8px; height: 8px; border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 0 5px rgba(34,197,94,.12);
+    }
+
+    h1{
+      margin: 10px 0 10px;
+      font-size: clamp(28px, 3.2vw, 44px);
+      line-height: 1.12;
+      letter-spacing: -0.02em;
+    }
+
+    .lead{
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+      max-width: 70ch;
+    }
+
+    .cta{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap: 10px;
+      padding: 11px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.05);
+      color: var(--text);
+      font-weight: 650;
+      font-size: 14px;
+      transition: .2s ease;
+      text-decoration: none;
+    }
+
+    .btn:hover{
+      background: rgba(255,255,255,.08);
+      transform: translateY(-1px);
+      text-decoration: none;
+    }
+
+    .btn-primary{
+      border-color: rgba(34,197,94,.35);
+      background: linear-gradient(135deg, rgba(34,197,94,.22), rgba(22,163,74,.12));
+    }
+    .btn-primary:hover{
+      border-color: rgba(34,197,94,.55);
+      background: linear-gradient(135deg, rgba(34,197,94,.28), rgba(22,163,74,.16));
+    }
+
+    .grid{
+      margin-top: 18px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    @media (max-width: 860px){
+      .grid{ grid-template-columns: 1fr; }
+    }
+
+    h2{
+      margin: 0 0 12px;
+      font-size: 18px;
+      letter-spacing: .01em;
+    }
+
+    ul{
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+    }
+
+    li{ margin: 8px 0; }
+
+    .meta{
+      display:grid;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .row{
+      display:flex;
+      gap: 10px;
+      align-items: baseline;
+      flex-wrap: wrap;
+    }
+
+    .label{
+      color: rgba(255,255,255,.88);
+      font-weight: 700;
+      letter-spacing: .01em;
+    }
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      padding: 7px 10px;
       border-radius: 999px;
       border: 1px solid var(--border);
-      background: rgba(255,255,255,0.05);
+      background: rgba(255,255,255,.04);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .footer{
+      padding: 26px 0 44px;
+      color: rgba(255,255,255,.55);
+      font-size: 12px;
+      border-top: 1px solid var(--border);
+      margin-top: 28px;
+    }
+
+    /* Services section */
+    .services{
+      margin-top: 18px;
+    }
+
+    .services-grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    @media (max-width: 980px){
+      .services-grid{ grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 640px){
+      .services-grid{ grid-template-columns: 1fr; }
+    }
+
+    .service-card{
+      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: 0 16px 45px rgba(0,0,0,.28);
+    }
+
+    .service-title{
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      margin: 0 0 8px;
+      font-weight: 800;
+      letter-spacing: .01em;
+      font-size: 15px;
+    }
+
+    .service-icon{
+      width: 28px; height: 28px;
+      border-radius: 10px;
+      display:grid;
+      place-items:center;
+      background: rgba(34,197,94,.14);
+      border: 1px solid rgba(34,197,94,.28);
+      flex: 0 0 auto;
+    }
+
+    .service-desc{
+      margin: 0;
+      color: var(--muted);
       font-size: 14px;
-      color: rgba(255,255,255,0.8);
+    }
+
+    @media (max-width: 420px){
+      .card-inner{ padding: 18px; }
+      .navlink{ padding: 7px 9px; }
+    }
+
+    .top-offset{
+      height: 52px;
+    }
+    @media (min-width: 900px){
+      .top-offset{ height: 0; }
+    }
+
+    /* Anchor offset for sticky header */
+    section[id]{
+      scroll-margin-top: 90px;
     }
   </style>
 </head>
+
 <body>
-  <main class="card" role="main" aria-label="Strona w budowie">
-    <h1>Strona dla Andrzeja</h1>
-    <p>w budowie</p>
-    <div class="badge">Wróć wkrótce 👷‍♂️</div>
+  <img class="logo" src="kotutb.png" alt="Logo KOT_UTB" />
+
+  <header>
+    <div class="container">
+      <div class="topbar">
+        <div class="brand">
+          <div class="brand-badge" aria-hidden="true"></div>
+          <div class="brand-text">
+            <strong>KOT_UTB</strong>
+            <span>Kompleksowa obsługa techniczna UTB</span>
+          </div>
+        </div>
+
+        <nav aria-label="Nawigacja">
+          <a class="navlink" href="#oferta">Oferta</a>
+          <a class="navlink" href="#uslugi">Usługi</a>
+          <a class="navlink" href="#kontakt">Kontakt</a>
+          <a class="navlink" href="#uprawnienia">Uprawnienia</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <div class="top-offset" aria-hidden="true"></div>
+
+  <main>
+    <div class="container">
+      <section class="hero" aria-label="Wizytówka">
+        <div class="card">
+          <div class="card-inner">
+            <div class="kicker"><span class="dot" aria-hidden="true"></span>Wizytówka</div>
+            <h1>KOT_UTB — przeglądy, ekspertyzy i resursy UTB</h1>
+            <p class="lead">
+              Firma specjalizuje się w wykonywaniu przeglądów specjalnych, ekspertyz technicznych,
+              obliczaniu resursów UTB, badań złączy spawanych.
+            </p>
+
+            <div class="cta" role="group" aria-label="Szybki kontakt">
+              <a class="btn btn-primary" href="mailto:kot_utb@interia.pl">✉️ Napisz e-mail</a>
+              <a class="btn" href="tel:+48663782007">📞 Zadzwoń: 663 782 007</a>
+              <a class="btn" href="tel:+48663722007">📞 Zadzwoń: 663 722 007</a>
+            </div>
+
+            <div class="cta" style="margin-top:14px;">
+              <span class="pill">📍 Mazowieckie • Pruszków</span>
+              <span class="pill">🗓️ Działalność od 2020</span>
+              <span class="pill">🧾 NIP: 7282158128</span>
+            </div>
+          </div>
+        </div>
+
+        <aside class="card" id="kontakt" aria-label="Dane kontaktowe">
+          <div class="card-inner">
+            <h2>Dane kontaktowe</h2>
+            <div class="meta">
+              <div class="row"><span class="label">Firma:</span> <span>KOMPLEKSOWA OBSŁUGA TECHNICZNA UTB A.Jakubowski - Magdalena Hejak</span></div>
+              <div class="row"><span class="label">Adres:</span> <span>ul. Hellenowska 22/3, 05-804 Pruszków</span></div>
+              <div class="row"><span class="label">Region:</span> <span>mazowieckie</span></div>
+              <div class="row"><span class="label">Telefon:</span>
+                <span>
+                  <a href="tel:+48663782007">663 782 007</a>, <a href="tel:+48663722007">663 722 007</a>
+                </span>
+              </div>
+              <div class="row"><span class="label">E-mail (oferty):</span> <span><a href="mailto:kot_utb@interia.pl">kot_utb@interia.pl</a></span></div>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <section class="grid">
+        <div class="card" id="oferta" aria-label="Opis działalności">
+          <div class="card-inner">
+            <h2>Opis działalności</h2>
+            <p class="lead" style="margin-bottom:14px;">
+              Firma KOT UTB oferuje:
+            </p>
+            <ul>
+              <li>obliczanie resursów,</li>
+              <li>wykonywanie przeglądów specjalnych,</li>
+              <li>badania złączy spawanych metodami VT, MT, PT,</li>
+              <li>sporządzanie specjalistycznych ekspertyz,</li>
+              <li>diagnostykę urządzeń technicznych,</li>
+              <li>doradztwo techniczne,</li>
+              <li>odtwarzanie dokumentacji technicznych lub sporządzanie ich od podstaw.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card" id="uprawnienia" aria-label="Uprawnienia UDT">
+          <div class="card-inner">
+            <h2>Uprawnienia UDT</h2>
+
+            <p class="lead" style="margin-bottom:12px;">
+              Szkolenie specjalistyczne UDT:
+            </p>
+            <ul>
+              <li>techniczne nr zaś.: CSZ/BS_DZP_30/2010/09</li>
+              <li>prawne nr zaś.: 650/2009</li>
+              <li>systemy jakości nr zaś.: 650/2009</li>
+              <li>podstawowe nr zaś.: CSZ/UTB-BASE/105/06/09</li>
+            </ul>
+
+            <p class="lead" style="margin:16px 0 12px;">
+              Uprawnienia specjalistyczne UDT:
+            </p>
+            <ul>
+              <li>badania urządzeń technicznych: BS/DZP-BU</li>
+              <li>uzgadnianie dokumentacji: BS/DZP-UD</li>
+              <li>uprawnienia zakładów: BS/DZP-UZ</li>
+              <li>sprawdzanie kwalifikacji: BS/DZP-SK</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- NEW: Services section -->
+      <section class="card services" id="uslugi" aria-label="Usługi">
+        <div class="card-inner">
+          <h2>Usługi</h2>
+          <p class="lead" style="margin-bottom:16px;">
+            Poniżej lista usług realizowanych przez KOT_UTB (zlecenia z terenu całego kraju).
+          </p>
+
+          <div class="services-grid">
+            <article class="service-card">
+              <h3 class="service-title">
+                <span class="service-icon" aria-hidden="true">🧾</span>
+                Ekspertyzy do wszystkich urządzeń technicznych
+              </h3>
+              <p class="service-desc">
+                Nasza firma zajmuje się wykonywaniem ekspertyz urządzeń technicznych. Przyjmujemy zlecenia z całego kraju.
+              </p>
+            </article>
+
+            <article class="service-card">
+              <h3 class="service-title">
+                <span class="service-icon" aria-hidden="true">🧪</span>
+                Badania złączy spawanych metodami VT, MT, PT
+              </h3>
+              <p class="service-desc">
+                Badania złączy spawanych metodami VT, MT, PT.
+              </p>
+            </article>
+
+            <article class="service-card">
+              <h3 class="service-title">
+                <span class="service-icon" aria-hidden="true">🛠️</span>
+                Doradztwo techniczne — zakupy i części zamienne
+              </h3>
+              <p class="service-desc">
+                Informacja dotycząca korzystnych zakupów i wymiany części zamiennych na urządzeniach technicznych.
+              </p>
+            </article>
+
+            <article class="service-card">
+              <h3 class="service-title">
+                <span class="service-icon" aria-hidden="true">✅</span>
+                Doradztwo techniczne — zasadność wymiany komponentów
+              </h3>
+              <p class="service-desc">
+                Informacja dotycząca zasadności wymiany kosztownych komponentów na urządzeniach technicznych.
+              </p>
+            </article>
+
+            <article class="service-card">
+              <h3 class="service-title">
+                <span class="service-icon" aria-hidden="true">🧰</span>
+                Doradztwo techniczne — bieżąca konserwacja
+              </h3>
+              <p class="service-desc">
+                Doradztwo techniczne UTB. Bieżąca konserwacja urządzeń, wskazanie kompetentnych firm konserwujących.
+              </p>
+            </article>
+
+            <article class="service-card">
+              <h3 class="service-title">
+                <span class="service-icon" aria-hidden="true">🛗</span>
+                Doradztwo techniczne — diagnostyka dźwigów
+              </h3>
+              <p class="service-desc">
+                Doradztwo techniczne. Diagnostyka dźwigów.
+              </p>
+            </article>
+
+            <article class="service-card">
+              <h3 class="service-title">
+                <span class="service-icon" aria-hidden="true">🔧</span>
+                Inne usługi techniczne — wymiana lin, pasów, sterowań
+              </h3>
+              <p class="service-desc">
+                Inne usługi techniczne — wymiana lin, pasów, sterowań urządzeń technicznych.
+              </p>
+            </article>
+
+            <article class="service-card">
+              <h3 class="service-title">
+                <span class="service-icon" aria-hidden="true">📊</span>
+                Obliczanie resursu
+              </h3>
+              <p class="service-desc">
+                Wykonujemy resursy do dźwigów, dźwigników, suwnic, wciągników, wciągarek, żurawi, podestów,
+                schodów i chodników ruchomych, przenośników kabinowych i krzesełkowych. Przyjmujemy zlecenia na terenie całego kraju.
+              </p>
+            </article>
+
+            <article class="service-card">
+              <h3 class="service-title">
+                <span class="service-icon" aria-hidden="true">📋</span>
+                Przeglądy specjalne
+              </h3>
+              <p class="service-desc">
+                Wykonujemy przeglądy specjalne dźwigów, dźwigników, suwnic, wciągarek, wciągników, żurawi, podestów,
+                schodów i chodników ruchomych. Przyjmujemy zlecenia z całego kraju.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <div class="container">
+          © <span id="year"></span> KOT_UTB
+        </div>
+      </footer>
+    </div>
   </main>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
