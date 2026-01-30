@@ -10,7 +10,6 @@
     :root{
       --bg: #0b1220;
       --card: rgba(255,255,255,.06);
-      --card2: rgba(255,255,255,.10);
       --text: rgba(255,255,255,.92);
       --muted: rgba(255,255,255,.72);
       --border: rgba(255,255,255,.12);
@@ -32,7 +31,6 @@
         radial-gradient(800px 450px at 90% 20%, rgba(22,163,74,.15), transparent 55%),
         linear-gradient(180deg, #070b14 0%, #0b1220 45%, #070b14 100%);
       line-height: 1.55;
-      scroll-behavior: smooth;
     }
 
     a{ color: inherit; text-decoration: none; }
@@ -122,47 +120,15 @@
       background: rgba(255,255,255,.04);
       text-decoration: none;
     }
-
-    .logo{
-      position: fixed;
-      top: 12px;
-      right: 12px;
-      z-index: 30;
-      width: 160px;
-      max-width: 42vw;
-      height: auto;
-      padding: 10px 12px;
-      border-radius: 14px;
-      border: 1px solid var(--border);
-      background: rgba(8, 13, 24, .55);
-      backdrop-filter: blur(10px);
-      box-shadow: var(--shadow);
-    }
-
-    @media (min-width: 900px){
-      .logo{
-        top: 16px;
-        right: 18px;
-        width: 190px;
-      }
+    .navlink.active{
+      color: var(--text);
+      border-color: rgba(34,197,94,.35);
+      background: linear-gradient(135deg, rgba(34,197,94,.18), rgba(22,163,74,.10));
+      text-decoration: none;
     }
 
     main{
-      padding: 34px 0 50px;
-    }
-
-    .hero{
-      margin-top: 14px;
-      display:grid;
-      grid-template-columns: 1.25fr .75fr;
-      gap: 18px;
-      align-items: start;
-    }
-
-    @media (max-width: 860px){
-      .hero{
-        grid-template-columns: 1fr;
-      }
+      padding: 26px 0 50px;
     }
 
     .card{
@@ -198,6 +164,12 @@
       font-size: clamp(28px, 3.2vw, 44px);
       line-height: 1.12;
       letter-spacing: -0.02em;
+    }
+
+    h2{
+      margin: 0 0 12px;
+      font-size: 18px;
+      letter-spacing: .01em;
     }
 
     .lead{
@@ -245,21 +217,16 @@
       background: linear-gradient(135deg, rgba(34,197,94,.28), rgba(22,163,74,.16));
     }
 
-    .grid{
-      margin-top: 18px;
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 18px;
-    }
-
-    @media (max-width: 860px){
-      .grid{ grid-template-columns: 1fr; }
-    }
-
-    h2{
-      margin: 0 0 12px;
-      font-size: 18px;
-      letter-spacing: .01em;
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.04);
+      color: var(--muted);
+      font-size: 13px;
     }
 
     ul{
@@ -267,7 +234,6 @@
       padding-left: 18px;
       color: var(--muted);
     }
-
     li{ margin: 8px 0; }
 
     .meta{
@@ -290,37 +256,32 @@
       letter-spacing: .01em;
     }
 
-    .pill{
-      display:inline-flex;
-      align-items:center;
-      gap: 8px;
-      padding: 7px 10px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,.04);
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    .footer{
-      padding: 26px 0 44px;
-      color: rgba(255,255,255,.55);
-      font-size: 12px;
-      border-top: 1px solid var(--border);
-      margin-top: 28px;
-    }
-
-    /* Services section */
-    .services{
+    /* "Podstrony" */
+    .page{
+      display: none;
       margin-top: 18px;
     }
+    .page.active{
+      display: block;
+    }
 
+    /* Layout wizytówki na stronie głównej */
+    .hero{
+      display:grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap: 18px;
+      align-items: start;
+    }
+    @media (max-width: 860px){
+      .hero{ grid-template-columns: 1fr; }
+    }
+
+    /* Usługi */
     .services-grid{
       display:grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 18px;
     }
-
     @media (max-width: 980px){
       .services-grid{ grid-template-columns: 1fr 1fr; }
     }
@@ -362,28 +323,22 @@
       font-size: 14px;
     }
 
+    .footer{
+      padding: 26px 0 44px;
+      color: rgba(255,255,255,.55);
+      font-size: 12px;
+      border-top: 1px solid var(--border);
+      margin-top: 28px;
+    }
+
     @media (max-width: 420px){
       .card-inner{ padding: 18px; }
       .navlink{ padding: 7px 9px; }
-    }
-
-    .top-offset{
-      height: 52px;
-    }
-    @media (min-width: 900px){
-      .top-offset{ height: 0; }
-    }
-
-    /* Anchor offset for sticky header */
-    section[id]{
-      scroll-margin-top: 90px;
     }
   </style>
 </head>
 
 <body>
-  <img class="logo" src="kotutb.png" alt="Logo KOT_UTB" />
-
   <header>
     <div class="container">
       <div class="topbar">
@@ -396,65 +351,69 @@
         </div>
 
         <nav aria-label="Nawigacja">
-          <a class="navlink" href="#oferta">Oferta</a>
-          <a class="navlink" href="#uslugi">Usługi</a>
-          <a class="navlink" href="#kontakt">Kontakt</a>
-          <a class="navlink" href="#uprawnienia">Uprawnienia</a>
+          <a class="navlink" href="#home" data-page="home">Strona główna</a>
+          <a class="navlink" href="#oferta" data-page="oferta">Oferta</a>
+          <a class="navlink" href="#uslugi" data-page="uslugi">Usługi</a>
+          <a class="navlink" href="#uprawnienia" data-page="uprawnienia">Uprawnienia</a>
+          <a class="navlink" href="#kontakt" data-page="kontakt">Kontakt</a>
         </nav>
       </div>
     </div>
   </header>
 
-  <div class="top-offset" aria-hidden="true"></div>
-
   <main>
     <div class="container">
-      <section class="hero" aria-label="Wizytówka">
-        <div class="card">
-          <div class="card-inner">
-            <div class="kicker"><span class="dot" aria-hidden="true"></span>Wizytówka firmy</div>
-            <h1>KOT_UTB — przeglądy, ekspertyzy i resursy UTB</h1>
-            <p class="lead">
-              Firma specjalizuje się w wykonywaniu przeglądów specjalnych, ekspertyz technicznych,
-              obliczaniu resursów UTB, badań złączy spawanych.
-            </p>
 
-            <div class="cta" role="group" aria-label="Szybki kontakt">
-              <a class="btn btn-primary" href="mailto:kot_utb@interia.pl">✉️ Napisz e-mail</a>
-              <a class="btn" href="tel:+48663782007">📞 Zadzwoń: 663 782 007</a>
-              <a class="btn" href="tel:+48663722007">📞 Zadzwoń: 663 722 007</a>
-            </div>
+      <!-- STRONA GŁÓWNA -->
+      <section class="page active" id="page-home" aria-label="Strona główna">
+        <div class="hero">
+          <div class="card">
+            <div class="card-inner">
+              <div class="kicker"><span class="dot" aria-hidden="true"></span>Wizytówka firmy</div>
+              <h1>KOT_UTB — przeglądy, ekspertyzy i resursy UTB</h1>
+              <p class="lead">
+                Firma specjalizuje się w wykonywaniu przeglądów specjalnych, ekspertyz technicznych,
+                obliczaniu resursów UTB, badań złączy spawanych.
+              </p>
 
-            <div class="cta" style="margin-top:14px;">
-              <span class="pill">📍 Mazowieckie • Pruszków</span>
-              <span class="pill">🗓️ Działalność od 2020</span>
-              <span class="pill">🧾 NIP: 7282158128</span>
-            </div>
-          </div>
-        </div>
-
-        <aside class="card" id="kontakt" aria-label="Dane kontaktowe">
-          <div class="card-inner">
-            <h2>Dane kontaktowe</h2>
-            <div class="meta">
-              <div class="row"><span class="label">Firma:</span> <span>KOMPLEKSOWA OBSŁUGA TECHNICZNA UTB Andrzej Jakubowski - Magdalena Hejak</span></div>
-              <div class="row"><span class="label">Adres:</span> <span>ul. Hellenowska 22/3, 05-804 Pruszków</span></div>
-              <div class="row"><span class="label">Region:</span> <span>mazowieckie</span></div>
-              <div class="row"><span class="label">Telefon:</span>
-                <span>
-                  <a href="tel:+48663782007">663 782 007</a>, <a href="tel:+48663722007">663 722 007</a>
-                </span>
+              <div class="cta" role="group" aria-label="Szybki kontakt">
+                <a class="btn btn-primary" href="mailto:kot_utb@interia.pl">✉️ Napisz e-mail</a>
+                <a class="btn" href="tel:+48663782007">📞 Zadzwoń: 663 782 007</a>
+                <a class="btn" href="tel:+48663722007">📞 Zadzwoń: 663 722 007</a>
               </div>
-              <div class="row"><span class="label">E-mail (oferty):</span> <span><a href="mailto:kot_utb@interia.pl">kot_utb@interia.pl</a></span></div>
+
+              <div class="cta" style="margin-top:14px;">
+                <span class="pill">📍 Mazowieckie • Pruszków</span>
+                <span class="pill">🗓️ Działalność od 2020</span>
+                <span class="pill">🧾 NIP: 7282158128</span>
+              </div>
             </div>
           </div>
-        </aside>
+
+          <aside class="card" aria-label="Szybkie dane">
+            <div class="card-inner">
+              <h2>Informacje</h2>
+              <div class="meta">
+                <div class="row">
+                  <span class="label">Firma:</span>
+                  <span>KOMPLEKSOWA OBSŁUGA TECHNICZNA UTB Andrzej Jakubowski - Magdalena Hejak</span>
+                </div>
+                <div class="row"><span class="label">Adres:</span> <span>ul. Hellenowska 22/3, 05-804 Pruszków</span></div>
+                <div class="row"><span class="label">E-mail (oferty):</span> <span><a href="mailto:kot_utb@interia.pl">kot_utb@interia.pl</a></span></div>
+              </div>
+              <div class="cta" style="margin-top:14px;">
+                <a class="btn" href="#kontakt" data-page="kontakt" onclick="return false;">➡️ Przejdź do kontaktu</a>
+              </div>
+            </div>
+          </aside>
+        </div>
       </section>
 
-      <section class="grid">
-        <div class="card" id="oferta" aria-label="Opis działalności">
+      <!-- OFERTA -->
+      <section class="page" id="page-oferta" aria-label="Oferta">
+        <div class="card">
           <div class="card-inner">
-            <h2>Opis działalności</h2>
+            <h2>Oferta</h2>
             <p class="lead" style="margin-bottom:14px;">
               Firma KOT UTB oferuje:
             </p>
@@ -469,8 +428,76 @@
             </ul>
           </div>
         </div>
+      </section>
 
-        <div class="card" id="uprawnienia" aria-label="Uprawnienia UDT">
+      <!-- USŁUGI -->
+      <section class="page" id="page-uslugi" aria-label="Usługi">
+        <div class="card">
+          <div class="card-inner">
+            <h2>Usługi</h2>
+            <p class="lead" style="margin-bottom:16px;">
+              Poniżej lista usług realizowanych przez KOT_UTB (zlecenia z terenu całego kraju).
+            </p>
+
+            <div class="services-grid">
+              <article class="service-card">
+                <h3 class="service-title"><span class="service-icon" aria-hidden="true">🧾</span>Ekspertyzy do wszystkich urządzeń technicznych</h3>
+                <p class="service-desc">Nasza firma zajmuje się wykonywaniem ekspertyz urządzeń technicznych. Przyjmujemy zlecenia z całego kraju.</p>
+              </article>
+
+              <article class="service-card">
+                <h3 class="service-title"><span class="service-icon" aria-hidden="true">🧪</span>Badania złączy spawanych metodami VT, MT, PT</h3>
+                <p class="service-desc">Badania złączy spawanych metodami VT, MT, PT.</p>
+              </article>
+
+              <article class="service-card">
+                <h3 class="service-title"><span class="service-icon" aria-hidden="true">🛠️</span>Doradztwo techniczne — zakupy i części zamienne</h3>
+                <p class="service-desc">Informacja dotycząca korzystnych zakupów i wymiany części zamiennych na urządzeniach technicznych.</p>
+              </article>
+
+              <article class="service-card">
+                <h3 class="service-title"><span class="service-icon" aria-hidden="true">✅</span>Doradztwo techniczne — zasadność wymiany komponentów</h3>
+                <p class="service-desc">Informacja dotycząca zasadności wymiany kosztownych komponentów na urządzeniach technicznych.</p>
+              </article>
+
+              <article class="service-card">
+                <h3 class="service-title"><span class="service-icon" aria-hidden="true">🧰</span>Doradztwo techniczne — bieżąca konserwacja</h3>
+                <p class="service-desc">Doradztwo techniczne UTB. Bieżąca konserwacja urządzeń, wskazanie kompetentnych firm konserwujących.</p>
+              </article>
+
+              <article class="service-card">
+                <h3 class="service-title"><span class="service-icon" aria-hidden="true">🛗</span>Doradztwo techniczne — diagnostyka dźwigów</h3>
+                <p class="service-desc">Doradztwo techniczne. Diagnostyka dźwigów.</p>
+              </article>
+
+              <article class="service-card">
+                <h3 class="service-title"><span class="service-icon" aria-hidden="true">🔧</span>Inne usługi techniczne — wymiana lin, pasów, sterowań</h3>
+                <p class="service-desc">Inne usługi techniczne — wymiana lin, pasów, sterowań urządzeń technicznych.</p>
+              </article>
+
+              <article class="service-card">
+                <h3 class="service-title"><span class="service-icon" aria-hidden="true">📊</span>Obliczanie resursu</h3>
+                <p class="service-desc">
+                  Wykonujemy resursy do dźwigów, dźwigników, suwnic, wciągników, wciągarek, żurawi, podestów,
+                  schodów i chodników ruchomych, przenośników kabinowych i krzesełkowych. Przyjmujemy zlecenia na terenie całego kraju.
+                </p>
+              </article>
+
+              <article class="service-card">
+                <h3 class="service-title"><span class="service-icon" aria-hidden="true">📋</span>Przeglądy specjalne</h3>
+                <p class="service-desc">
+                  Wykonujemy przeglądy specjalne dźwigów, dźwigników, suwnic, wciągarek, wciągników, żurawi, podestów,
+                  schodów i chodników ruchomych. Przyjmujemy zlecenia z całego kraju.
+                </p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- UPRAWNIENIA -->
+      <section class="page" id="page-uprawnienia" aria-label="Uprawnienia">
+        <div class="card">
           <div class="card-inner">
             <h2>Uprawnienia UDT</h2>
 
@@ -497,106 +524,30 @@
         </div>
       </section>
 
-      <!-- NEW: Services section -->
-      <section class="card services" id="uslugi" aria-label="Usługi">
-        <div class="card-inner">
-          <h2>Usługi</h2>
-          <p class="lead" style="margin-bottom:16px;">
-            Poniżej lista usług realizowanych przez KOT_UTB (zlecenia z terenu całego kraju).
-          </p>
+      <!-- KONTAKT (NA KOŃCU MENU) -->
+      <section class="page" id="page-kontakt" aria-label="Kontakt">
+        <div class="card">
+          <div class="card-inner">
+            <h2>Kontakt</h2>
+            <div class="meta">
+              <div class="row"><span class="label">Firma:</span> <span>KOMPLEKSOWA OBSŁUGA TECHNICZNA UTB Andrzej Jakubowski - Magdalena Hejak</span></div>
+              <div class="row"><span class="label">Adres:</span> <span>ul. Hellenowska 22/3, 05-804 Pruszków</span></div>
+              <div class="row"><span class="label">Region:</span> <span>mazowieckie</span></div>
+              <div class="row">
+                <span class="label">Telefon:</span>
+                <span>
+                  <a href="tel:+48663782007">663 782 007</a>, <a href="tel:+48663722007">663 722 007</a>
+                </span>
+              </div>
+              <div class="row"><span class="label">E-mail (oferty):</span> <span><a href="mailto:kot_utb@interia.pl">kot_utb@interia.pl</a></span></div>
+              <div class="row"><span class="label">NIP:</span> <span>7282158128</span></div>
+              <div class="row"><span class="label">Rok rozpoczęcia działalności:</span> <span>2020</span></div>
+            </div>
 
-          <div class="services-grid">
-            <article class="service-card">
-              <h3 class="service-title">
-                <span class="service-icon" aria-hidden="true">🧾</span>
-                Ekspertyzy do wszystkich urządzeń technicznych
-              </h3>
-              <p class="service-desc">
-                Nasza firma zajmuje się wykonywaniem ekspertyz urządzeń technicznych. Przyjmujemy zlecenia z całego kraju.
-              </p>
-            </article>
-
-            <article class="service-card">
-              <h3 class="service-title">
-                <span class="service-icon" aria-hidden="true">🧪</span>
-                Badania złączy spawanych metodami VT, MT, PT
-              </h3>
-              <p class="service-desc">
-                Badania złączy spawanych metodami VT, MT, PT.
-              </p>
-            </article>
-
-            <article class="service-card">
-              <h3 class="service-title">
-                <span class="service-icon" aria-hidden="true">🛠️</span>
-                Doradztwo techniczne — zakupy i części zamienne
-              </h3>
-              <p class="service-desc">
-                Informacja dotycząca korzystnych zakupów i wymiany części zamiennych na urządzeniach technicznych.
-              </p>
-            </article>
-
-            <article class="service-card">
-              <h3 class="service-title">
-                <span class="service-icon" aria-hidden="true">✅</span>
-                Doradztwo techniczne — zasadność wymiany komponentów
-              </h3>
-              <p class="service-desc">
-                Informacja dotycząca zasadności wymiany kosztownych komponentów na urządzeniach technicznych.
-              </p>
-            </article>
-
-            <article class="service-card">
-              <h3 class="service-title">
-                <span class="service-icon" aria-hidden="true">🧰</span>
-                Doradztwo techniczne — bieżąca konserwacja
-              </h3>
-              <p class="service-desc">
-                Doradztwo techniczne UTB. Bieżąca konserwacja urządzeń, wskazanie kompetentnych firm konserwujących.
-              </p>
-            </article>
-
-            <article class="service-card">
-              <h3 class="service-title">
-                <span class="service-icon" aria-hidden="true">🛗</span>
-                Doradztwo techniczne — diagnostyka dźwigów
-              </h3>
-              <p class="service-desc">
-                Doradztwo techniczne. Diagnostyka dźwigów.
-              </p>
-            </article>
-
-            <article class="service-card">
-              <h3 class="service-title">
-                <span class="service-icon" aria-hidden="true">🔧</span>
-                Inne usługi techniczne — wymiana lin, pasów, sterowań
-              </h3>
-              <p class="service-desc">
-                Inne usługi techniczne — wymiana lin, pasów, sterowań urządzeń technicznych.
-              </p>
-            </article>
-
-            <article class="service-card">
-              <h3 class="service-title">
-                <span class="service-icon" aria-hidden="true">📊</span>
-                Obliczanie resursu
-              </h3>
-              <p class="service-desc">
-                Wykonujemy resursy do dźwigów, dźwigników, suwnic, wciągników, wciągarek, żurawi, podestów,
-                schodów i chodników ruchomych, przenośników kabinowych i krzesełkowych. Przyjmujemy zlecenia na terenie całego kraju.
-              </p>
-            </article>
-
-            <article class="service-card">
-              <h3 class="service-title">
-                <span class="service-icon" aria-hidden="true">📋</span>
-                Przeglądy specjalne
-              </h3>
-              <p class="service-desc">
-                Wykonujemy przeglądy specjalne dźwigów, dźwigników, suwnic, wciągarek, wciągników, żurawi, podestów,
-                schodów i chodników ruchomych. Przyjmujemy zlecenia z całego kraju.
-              </p>
-            </article>
+            <div class="cta" role="group" aria-label="Szybki kontakt">
+              <a class="btn btn-primary" href="mailto:kot_utb@interia.pl">✉️ Napisz e-mail</a>
+              <a class="btn" href="tel:+48663782007">📞 Zadzwoń</a>
+            </div>
           </div>
         </div>
       </section>
@@ -606,11 +557,69 @@
           © <span id="year"></span> KOT_UTB
         </div>
       </footer>
+
     </div>
   </main>
 
   <script>
+    // Rok w stopce
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Router: pokazuje "podstrony" na podstawie hash (np. #oferta)
+    const pages = ["home","oferta","uslugi","uprawnienia","kontakt"];
+
+    function setActive(pageKey){
+      // strona
+      for (const key of pages){
+        const el = document.getElementById("page-" + key);
+        if (el) el.classList.toggle("active", key === pageKey);
+      }
+
+      // menu
+      document.querySelectorAll(".navlink").forEach(a => {
+        a.classList.toggle("active", a.dataset.page === pageKey);
+      });
+
+      // tytuł (opcjonalnie, ale fajnie wygląda w zakładce)
+      const titles = {
+        home: "KOT_UTB — Wizytówka",
+        oferta: "KOT_UTB — Oferta",
+        uslugi: "KOT_UTB — Usługi",
+        uprawnienia: "KOT_UTB — Uprawnienia",
+        kontakt: "KOT_UTB — Kontakt"
+      };
+      document.title = titles[pageKey] || titles.home;
+    }
+
+    function currentPageFromHash(){
+      const hash = (location.hash || "#home").replace("#","");
+      return pages.includes(hash) ? hash : "home";
+    }
+
+    function navigate(pageKey){
+      if (!pages.includes(pageKey)) pageKey = "home";
+      if (location.hash !== "#" + pageKey) location.hash = "#" + pageKey;
+      setActive(pageKey);
+      // przewiń do góry contentu (bez skakania po elementach)
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    // Obsługa kliknięć w menu (i link w Home -> Kontakt)
+    document.querySelectorAll("[data-page]").forEach(a => {
+      a.addEventListener("click", (e) => {
+        e.preventDefault();
+        navigate(a.dataset.page);
+      });
+    });
+
+    // Reakcja na ręczną zmianę hash (np. wklejenie linku)
+    window.addEventListener("hashchange", () => {
+      setActive(currentPageFromHash());
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    // Start
+    setActive(currentPageFromHash());
   </script>
 </body>
 </html>
